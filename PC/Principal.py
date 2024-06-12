@@ -19,7 +19,7 @@ class WatchMen:
     def __init__(self):
         self.DataBase = ConexionDB(Datos)
         
-    def InicializarDispositivos(self, dvrs:dict, camaras:dict) -> (dict, dict):
+    def InicializarDispositivos(self, dvrs:dict, camaras:dict) -> (dict, dict): # type: ignore
         dvrObjects = {}
         for key, dvr in dvrs.items():
             dvrObjects[dvr["id"]] = DVR(dvr["ip"], 
@@ -62,7 +62,7 @@ class WatchMen:
     
     def mainSetup(self):
         self.raspberryIp, self.raspberryPuerto = self.DataBase.ConsultarDatosRaspberry("Clave del Dispositivo")
-        self.Raspberry = ClienteTCP(self.raspberryIp, self.raspberryPuerto)
+        #self.Raspberry = ClienteTCP(self.raspberryIp, self.raspberryPuerto)
         
         dvrs = self.DataBase.ConsultarDvrs()
 
@@ -85,6 +85,7 @@ class WatchMen:
         configDict = {"tipo": "configuracion"}
         dispositivos = {**configDict, **dvrData, **cameraData}
 
+        """
         sended = self.Raspberry.EnviarData(dispositivos)
         if not sended:
             print("No se pudo enviar lista de dispositivos")
@@ -92,14 +93,13 @@ class WatchMen:
         print("sended: ",dispositivos)
         data = self.Raspberry.ConvertToDict("conexion", "1", True)
         self.Raspberry.EnviarData(data)
-        """
 
+        """
         self.observers = {}
         manageSchedule = threading.Thread(target=self.manageScheduleLoop)
         manageSchedule.daemon = True
         manageSchedule.start()
         manageSchedule.join()
-        """
         #self.mainLoop()
         
                     

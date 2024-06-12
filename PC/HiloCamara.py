@@ -12,7 +12,7 @@ class Observer(mp.Process):
         super().__init__()
         self.sharedValue = sharedValue
         self.DataBase = DataBase
-        self.Raspberry = ClienteTCP(ip, puerto)
+        #self.Raspberry = ClienteTCP(ip, puerto)
         self.cameraIp = cameraIp
         self.cameraId = cameraId
         self.stopEvent = mp.Event()
@@ -49,22 +49,24 @@ class Observer(mp.Process):
             # Verificar si hay contornos significativos
             motion_detected = False
             for contour in contours:
-                if cv2.contourArea(contour) > 500:  # Ajusta el tamaño mínimo del área del contorno
+                if cv2.contourArea(contour) > 800:  # Ajusta el tamaï¿½o mï¿½nimo del ï¿½rea del contorno
                     motion_detected = True
                     break
 
             if motion_detected:
                 timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                data = self.Raspberry.ConvertToDict("movimiento", self.camaraId, True)
-                self.Raspberry.EnviarData(data)
+                print(f"movimiento - {self.cameraId}")
+                #data = self.Raspberry.ConvertToDict("movimiento", self.camaraId, True)
+                #self.Raspberry.EnviarData(data)
                 #self.DataBase.InsertarSituacion("movimiento", self.camaraId, timestamp)
 
             # Realiza la inferencia
             results = model(frame, conf=0.7, verbose=False, classes=[0])
             if 0 in results[0].boxes.cls:
                 timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                data = self.Raspberry.ConvertToDict("persona", self.camaraId, True)
-                self.Raspberry.EnviarData(data)
+                print(f"persona - {self.cameraId}")
+                #data = self.Raspberry.ConvertToDict("persona", self.camaraId, True)
+                #self.Raspberry.EnviarData(data)
                 #self.DataBase.InsertarSituacion("persona", self.camaraId, timestamp)
 
 

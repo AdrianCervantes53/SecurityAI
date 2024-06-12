@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="Recursos">
+    <file>Icons/gpaIcon.svg</file>
+  </qresource>
+</RCC>
