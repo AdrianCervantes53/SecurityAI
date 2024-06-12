@@ -60,6 +60,11 @@ class Camara:
     def vigilanciaActiva(self): return self._vigilanciaActiva
     @vigilanciaActiva.setter
     def vigilanciaActiva(self, valor): self._vigilanciaActiva = valor
+    
+    @property
+    def running(self): return self._running
+    @running.setter
+    def running(self, valor): self._running = valor
 
     @property
     def active(self): return self._active
