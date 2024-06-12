@@ -19,7 +19,7 @@ class Observer(mp.Process):
         
     def run(self):
         
-        self.sharedValue.running = True
+        #self.sharedValue.running = True
         model = YOLO('Modelos/yolov8n.pt')
         cap = cv2.VideoCapture(self.cameraIp)
         
@@ -73,7 +73,8 @@ class Observer(mp.Process):
             first_frame_gray = gray
     
         cap.release()
-        self.sharedValue.running = False
+        self.stop()
+        #self.sharedValue.running = False
         
     def stop(self):
         self.stopEvent.set()

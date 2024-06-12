@@ -148,21 +148,25 @@ class WatchMen:
                 if camara.vigilanciaActiva:
                     if not camara.running:
                         self.startProcess(camara)
+                        camara.running = True
                 else:
-                    if camara.running:
+                    #if camara.running:
+                    try:
                         self.stopProcess(camara)
+                    except Exception as e:
+                        print("Error stoping process: ", e)
                     
     def startProcess(self, camara):
         try:
-            with mp.Manager() as manager:
-                sharedValue = manager.Namespace()
-                sharedValue.running = camara.running
-                cam = Observer(sharedValue, self.DataBase, self.raspberryIp, self.raspberryPuerto, camara.camaraIp, camara.camaraId)
-                cam.start()
-                self.observers[camara.camaraId] = cam
-                timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                print(f"Started process {camara.nombre} at {timestamp}")
-                #self.DataBase.NewTask(camara.camaraId, camara.nombre, timestamp)
+            #with mp.Manager() as manager:
+            #sharedValue = manager.Namespace()
+            #sharedValue.running = camara.running
+            cam = Observer(0, self.DataBase, self.raspberryIp, self.raspberryPuerto, camara.camaraIp, camara.camaraId)
+            cam.start()
+            self.observers[camara.camaraId] = cam
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            print(f"Started process {camara.nombre} at {timestamp}")
+            #self.DataBase.NewTask(camara.camaraId, camara.nombre, timestamp)
         except ErrorStartingProcess as e:
             print("ErrorStartingProcess:", e)
         
