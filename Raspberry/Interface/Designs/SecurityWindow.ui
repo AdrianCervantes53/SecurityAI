@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>WatchMenWindow</class>
+ <widget class="QMainWindow" name="WatchMenWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1920</width>
+    <height>1080</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+font: 20pt &quot;Ubuntu&quot;;
+}</string>
+  </property>
+  <widget class="QWidget" name="mainWidget">
+   <layout class="QGridLayout" name="gridLayout" rowstretch="10,90,5" columnstretch="20,1,27,50">
+    <property name="leftMargin">
+     <number>0</number>
+    </property>
+    <property name="topMargin">
+     <number>0</number>
+    </property>
+    <property name="rightMargin">
+     <number>0</number>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <item row="1" column="3">
+     <widget class="QWidget" name="eventWidget" native="true">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="0" colspan="4">
+     <widget class="QWidget" name="bottomBarWidget" native="true">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(0, 0, 0);</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QWidget" name="deviceWidget" native="true">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(216, 216, 216);</string>
+      </property>
+      <widget class="QWidget" name="widget" native="true">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>381</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <widget class="QLabel" name="label">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>20</y>
+          <width>141</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Total DVRs:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_2">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>20</y>
+          <width>71</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="widget_2" native="true">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>41</width>
+          <height>31</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="widget_3" native="true">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>340</y>
+         <width>371</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <widget class="QLabel" name="label_3">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>20</y>
+          <width>191</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Total Cámaras:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_4">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>20</y>
+          <width>51</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="widget_4" native="true">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>41</width>
+          <height>31</height>
+         </rect>
+        </property>
+       </widget>
+      </widget>
+      <widget class="Line" name="line_2">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>320</y>
+         <width>381</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+      <widget class="QWidget" name="widget_5" native="true">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>80</y>
+         <width>381</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <widget class="QLabel" name="label_5">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>10</y>
+          <width>161</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Conectados:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_6">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>10</y>
+          <width>71</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="widget_6" native="true">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(76, 165, 34);
+border-radius: 15px;</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="widget_7" native="true">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>150</y>
+         <width>381</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <widget class="QLabel" name="label_7">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>10</y>
+          <width>201</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Desconectados:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_8">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>10</y>
+          <width>71</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="widget_8" native="true">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(170, 0, 0);
+border-radius: 15px;</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="widget_9" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>440</y>
+         <width>381</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <widget class="QLabel" name="label_9">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>10</y>
+          <width>161</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Conectadas:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_10">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>10</y>
+          <width>71</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="widget_10" native="true">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(76, 165, 34);
+border-radius: 15px;</string>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="widget_11" native="true">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>510</y>
+         <width>381</width>
+         <height>51</height>
+        </rect>
+       </property>
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>70</x>
+          <y>10</y>
+          <width>201</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Desconectadas:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_12">
+        <property name="geometry">
+         <rect>
+          <x>300</x>
+          <y>10</y>
+          <width>71</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>0</string>
+        </property>
+       </widget>
+       <widget class="QWidget" name="widget_12" native="true">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>10</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(170, 0, 0);
+border-radius: 15px;</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QWidget" name="historialWidget" native="true">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(216, 216, 216);</string>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3" rowstretch="10,90">
+       <item row="1" column="2">
+        <widget class="QTextEdit" name="textEdit">
+         <property name="font">
+          <font>
+           <family>Ubuntu</family>
+           <pointsize>20</pointsize>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(243, 243, 243);
+border:none;</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string>No hay eventos recientes...</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="2" colspan="2">
+        <widget class="QLabel" name="historialLabel">
+         <property name="text">
+          <string>Historial</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="4">
+     <widget class="QWidget" name="topBarWidget" native="true">
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(190, 20, 23);</string>
+      </property>
+      <widget class="QLabel" name="iconLabel">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>10</y>
+         <width>241</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-image: url(:/Recursos/gpaIcon.svg);</string>
+       </property>
+       <property name="text">
+        <string>GPA WatchMen</string>
+       </property>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../Recursos/resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>
