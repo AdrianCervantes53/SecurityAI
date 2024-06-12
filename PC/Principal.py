@@ -150,11 +150,11 @@ class WatchMen:
                         self.startProcess(camara)
                         camara.running = True
                 else:
-                    #if camara.running:
-                    try:
-                        self.stopProcess(camara)
-                    except Exception as e:
-                        print("Error stoping process: ", e)
+                    if camara.running:
+                        try:
+                            self.stopProcess(camara)
+                        except Exception as e:
+                            print("Error stoping process: ", e)
                     
     def startProcess(self, camara):
         try:
@@ -178,6 +178,7 @@ class WatchMen:
             del self.observers[camara.camaraId]
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             print(f"Finished process {camara.nombre} at {timestamp}")
+            camara.running = False
             #self.DataBase.EndTask(camara.camaraId, timestamp)
         except NoProcessToStop as e:
             print("NoProcessToStop", e)
