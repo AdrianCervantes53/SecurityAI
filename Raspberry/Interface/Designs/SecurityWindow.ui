@@ -423,6 +423,51 @@ border:none;</string>
         <string>GPA WatchMen</string>
        </property>
       </widget>
+      <widget class="QPushButton" name="pushButton">
+       <property name="geometry">
+        <rect>
+         <x>1830</x>
+         <y>20</y>
+         <width>81</width>
+         <height>61</height>
+        </rect>
+       </property>
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <family>Arial Rounded MT Bold</family>
+         <pointsize>40</pointsize>
+         <italic>false</italic>
+         <bold>false</bold>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton{
+border:none;
+	font: 40pt &quot;Arial Rounded MT Bold&quot;;
+}
+QPushButton:hover{
+background-color: rgb(76, 165, 34);
+}</string>
+       </property>
+       <property name="text">
+        <string>X</string>
+       </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
+       <property name="default">
+        <bool>false</bool>
+       </property>
+       <property name="flat">
+        <bool>false</bool>
+       </property>
+      </widget>
      </widget>
     </item>
     <item row="1" column="1">
@@ -435,8 +480,26 @@ border:none;</string>
    </layout>
   </widget>
  </widget>
- <resources>
-  <include location="../Recursos/resources.qrc"/>
- </resources>
- <connections/>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>pressed()</signal>
+   <receiver>WatchMenWindow</receiver>
+   <slot>closeApp()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1881</x>
+     <y>39</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1822</x>
+     <y>-56</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>closeApp()</slot>
+ </slots>
 </ui>

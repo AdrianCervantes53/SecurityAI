@@ -3,7 +3,7 @@ import subprocess
 
 def convertir_ui_a_py(archivo_ui):
     archivo_py = os.path.splitext(archivo_ui)[0] + ".py"
-    comando_convertir = f"pyuic6 -x {archivo_ui} -o {archivo_py}"
+    comando_convertir = f"pyuic5 -x {archivo_ui} -o {archivo_py}"
     
     # Ejecutar el comando para convertir .ui a .py
     subprocess.run(comando_convertir, shell=True)
@@ -14,7 +14,7 @@ def convertir_ui_a_py(archivo_ui):
 
 if __name__ == "__main__":
     # Lista de archivos .ui que quieres convertir
-    BASE_PATH = "Interface/Designs/"
+    BASE_PATH = "Raspberry/Interface/Designs/"
     archivos_ui = ["SecurityWindow.ui","messageDesign.ui", "alertDesign.ui", "detectionDesign.ui"]
 
     for archivo_ui in archivos_ui:

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Dialog</class>
- <widget class="QDialog" name="Dialog">
+ <class>messageDialog</class>
+ <widget class="QDialog" name="messageDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>900</width>
-    <height>200</height>
+    <height>140</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -39,7 +39,8 @@ font: 20pt &quot;Ubuntu&quot;;
      <property name="styleSheet">
       <string notr="true">background-color: rgb(230, 230, 230);
 border-left:40px solid;
-border-color: rgb(76, 165, 34);</string>
+border-color: rgb(76, 165, 34);
+border-color: rgb(68, 146, 229);</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2" rowstretch="0" columnstretch="80,0,20">
       <property name="leftMargin">
@@ -68,7 +69,7 @@ border-color: rgb(76, 165, 34);</string>
         <property name="font">
          <font>
           <family>Arial Rounded MT Bold</family>
-          <pointsize>28</pointsize>
+          <pointsize>40</pointsize>
           <italic>false</italic>
           <bold>false</bold>
          </font>
@@ -76,10 +77,11 @@ border-color: rgb(76, 165, 34);</string>
         <property name="styleSheet">
          <string notr="true">QPushButton{
 border:none;
-	font: 28pt &quot;Arial Rounded MT Bold&quot;;
+	font: 40pt &quot;Arial Rounded MT Bold&quot;;
 }
 QPushButton:hover{
 background-color: rgb(76, 165, 34);
+background-color: rgb(170, 0, 0);
 }</string>
         </property>
         <property name="text">
@@ -101,11 +103,11 @@ background-color: rgb(76, 165, 34);
         <property name="styleSheet">
          <string notr="true">border:none;</string>
         </property>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="messageLabel">
          <property name="geometry">
           <rect>
-           <x>40</x>
-           <y>80</y>
+           <x>10</x>
+           <y>50</y>
            <width>631</width>
            <height>81</height>
           </rect>
@@ -114,17 +116,28 @@ background-color: rgb(76, 165, 34);
           <string notr="true">background-color: none;</string>
          </property>
          <property name="text">
-          <string>Conexión establecida con camara(s):</string>
+          <string>Conexión establecida con {dispositivo}(s): {nombre}</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
          </property>
         </widget>
         <widget class="QLabel" name="label">
          <property name="geometry">
           <rect>
-           <x>100</x>
-           <y>20</y>
+           <x>80</x>
+           <y>10</y>
            <width>111</width>
            <height>31</height>
           </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Ubuntu</family>
+           <pointsize>20</pointsize>
+           <italic>false</italic>
+           <bold>false</bold>
+          </font>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color: none;</string>
@@ -136,8 +149,8 @@ background-color: rgb(76, 165, 34);
         <widget class="QLabel" name="label_3">
          <property name="geometry">
           <rect>
-           <x>60</x>
-           <y>20</y>
+           <x>30</x>
+           <y>10</y>
            <width>21</width>
            <height>31</height>
           </rect>
@@ -170,5 +183,25 @@ border-color: rgb(216, 216, 216);
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>messageDialog</receiver>
+   <slot>clearAlert()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>825</x>
+     <y>83</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1091</x>
+     <y>96</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>clearAlert()</slot>
+ </slots>
 </ui>

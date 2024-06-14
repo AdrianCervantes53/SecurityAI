@@ -82,25 +82,23 @@ class WatchMen:
             for outer_key, inner_dict in dvrs.items()
             }
 
-        configDict = {"tipo": "configuracion"}
-        dispositivos = {**configDict, **dvrData, **cameraData}
+        configCamDict = {"tipo": "camaras"}
+        configDvrDict = {"tipo": "dvrs"}
+        camDict = {**configCamDict, **cameraData}
+        dvrDict = {**configDvrDict, **dvrData}
 
-        """
-        sended = self.Raspberry.EnviarData(dispositivos)
-        if not sended:
-            print("No se pudo enviar lista de dispositivos")
-            return
-        print("sended: ",dispositivos)
+        _ = self.Raspberry.EnviarData(camDict)
+        _ = self.Raspberry.EnviarData(dvrDict)
+
         data = self.Raspberry.ConvertToDict("conexion", "1", True)
         self.Raspberry.EnviarData(data)
 
-        """
         self.observers = {}
         manageSchedule = threading.Thread(target=self.manageScheduleLoop)
         manageSchedule.daemon = True
         manageSchedule.start()
         #manageSchedule.join()
-        self.mainLoop()
+        #self.mainLoop()
         
                     
     def mainLoop(self):
@@ -114,15 +112,15 @@ class WatchMen:
                     if dvr.dvrId not in dvrDesconectado:
                         dvr.active = False
                         print(f"conexion - {dvr.dvrId} - {dvr.active}")
-                        #data = self.Raspberry.ConvertToDict("conexion", dvr.dvrId, dvr.active)
-                        #self.Raspberry.EnviarData(data)
+                        data = self.Raspberry.ConvertToDict("conexion", dvr.dvrId, dvr.active)
+                        self.Raspberry.EnviarData(data)
                         dvrDesconectado.add(dvr.dvrId)
                 else:
                     if connected and dvr.dvrId in dvrDesconectado:
                         dvr.active = True
                         print(f"conexion - {dvr.dvrId} - {dvr.active}")
-                        #data = self.Raspberry.ConvertToDict("conexion", dvr.dvrId, dvr.active)
-                        #self.Raspberry.EnviarData()
+                        data = self.Raspberry.ConvertToDict("conexion", dvr.dvrId, dvr.active)
+                        self.Raspberry.EnviarData()
                         dvrDesconectado.remove(dvr.dvrId)
 
             for camara in self.camaraObjects.values():
@@ -131,16 +129,16 @@ class WatchMen:
                 if not camara.active:
                     if camara.camaraId not in camaraDesconectada:
                         camara.active = False
-                        #data = self.Raspberry.ConvertToDict("conexion", camara.camaraId, camara.active)
-                        #self.Raspberry.EnviarData(data)
+                        data = self.Raspberry.ConvertToDict("conexion", camara.camaraId, camara.active)
+                        self.Raspberry.EnviarData(data)
                         print(f"conexion - {camara.camaraId} - {camara.active}")
                         camaraDesconectada.add(camara.camaraId)
                     continue
                 else:
                     if camara.camaraId in camaraDesconectada:
                         camara.active = True
-                        #data = self.Raspberry.ConvertToDict("conexion", camara.camaraId, dvr.active)
-                        #self.Raspberry.EnviarData(data)
+                        data = self.Raspberry.ConvertToDict("conexion", camara.camaraId, dvr.active)
+                        self.Raspberry.EnviarData(data)
                         print(f"conexion - {camara.camaraId} - {camara.active}")
                         camaraDesconectada.remove(camara.camaraId)
                         
@@ -158,9 +156,6 @@ class WatchMen:
                     
     def startProcess(self, camara):
         try:
-            #with mp.Manager() as manager:
-            #sharedValue = manager.Namespace()
-            #sharedValue.running = camara.running
             cam = Observer(0, self.DataBase, self.raspberryIp, self.raspberryPuerto, camara.camaraIp, camara.camaraId)
             cam.start()
             self.observers[camara.camaraId] = cam

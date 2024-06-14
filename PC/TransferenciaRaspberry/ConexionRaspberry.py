@@ -30,7 +30,7 @@ class ClienteTCP(object):
         try:
             data = {
                 "tipo": tipo,
-                "id": dispositivoId,
+                "nombre": dispositivoId,
                 "accion": accion
                 }
             return data
