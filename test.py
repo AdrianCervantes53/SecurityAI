@@ -46,15 +46,6 @@ print(a)
 a.clear()
 print(a)
 """
+from datetime import datetime 
 
-
-events = {
-    "0": None,
-    "1": None,
-    "2": None,
-    "3": None,
-    "4": None
-}
-
-for i in events.values():
-    print(i)
+print(datetime.now().time())

@@ -19,7 +19,7 @@ font: 20pt &quot;Ubuntu&quot;;
 }</string>
   </property>
   <widget class="QWidget" name="mainWidget">
-   <layout class="QGridLayout" name="gridLayout" rowstretch="10,90,5" columnstretch="20,1,27,50">
+   <layout class="QGridLayout" name="gridLayout" rowstretch="10,90,5" columnstretch="18,1,29,50">
     <property name="leftMargin">
      <number>0</number>
     </property>
@@ -76,7 +76,7 @@ font: 20pt &quot;Ubuntu&quot;;
          <string>Total DVRs:</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="totalDvrsLabel">
         <property name="geometry">
          <rect>
           <x>300</x>
@@ -89,7 +89,7 @@ font: 20pt &quot;Ubuntu&quot;;
          <string>0</string>
         </property>
        </widget>
-       <widget class="QWidget" name="widget_2" native="true">
+       <widget class="QWidget" name="dvrIcon" native="true">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -122,7 +122,7 @@ font: 20pt &quot;Ubuntu&quot;;
          <string>Total Cámaras:</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="totalCamarasLabel">
         <property name="geometry">
          <rect>
           <x>300</x>
@@ -135,7 +135,7 @@ font: 20pt &quot;Ubuntu&quot;;
          <string>0</string>
         </property>
        </widget>
-       <widget class="QWidget" name="widget_4" native="true">
+       <widget class="QWidget" name="camIcon" native="true">
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -181,7 +181,7 @@ font: 20pt &quot;Ubuntu&quot;;
          <string>Conectados:</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_6">
+       <widget class="QLabel" name="connectedDvrsLabel">
         <property name="geometry">
          <rect>
           <x>300</x>
@@ -231,7 +231,7 @@ border-radius: 15px;</string>
          <string>Desconectados:</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_8">
+       <widget class="QLabel" name="disconnectedDvrsLabel">
         <property name="geometry">
          <rect>
           <x>300</x>
@@ -281,7 +281,7 @@ border-radius: 15px;</string>
          <string>Conectadas:</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_10">
+       <widget class="QLabel" name="connectedCamarasLabel">
         <property name="geometry">
          <rect>
           <x>300</x>
@@ -331,7 +331,7 @@ border-radius: 15px;</string>
          <string>Desconectadas:</string>
         </property>
        </widget>
-       <widget class="QLabel" name="label_12">
+       <widget class="QLabel" name="disconnectedCamarasLabel">
         <property name="geometry">
          <rect>
           <x>300</x>
@@ -368,7 +368,7 @@ border-radius: 15px;</string>
       </property>
       <layout class="QGridLayout" name="gridLayout_3" rowstretch="10,90">
        <item row="1" column="2">
-        <widget class="QTextEdit" name="textEdit">
+        <widget class="QTextEdit" name="historialTextEdit">
          <property name="font">
           <font>
            <family>Ubuntu</family>
@@ -383,6 +383,9 @@ border:none;</string>
          </property>
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+         <property name="overwriteMode">
+          <bool>false</bool>
          </property>
          <property name="placeholderText">
           <string>No hay eventos recientes...</string>
@@ -426,10 +429,10 @@ border:none;</string>
       <widget class="QPushButton" name="pushButton">
        <property name="geometry">
         <rect>
-         <x>1830</x>
-         <y>20</y>
-         <width>81</width>
-         <height>61</height>
+         <x>1810</x>
+         <y>0</y>
+         <width>111</width>
+         <height>101</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -452,7 +455,7 @@ border:none;
 	font: 40pt &quot;Arial Rounded MT Bold&quot;;
 }
 QPushButton:hover{
-background-color: rgb(76, 165, 34);
+background-color: rgba(0, 0, 0,50);
 }</string>
        </property>
        <property name="text">

@@ -1,11 +1,12 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QListWidget, QAction, QWidget, QToolBar
-from PyQt5.QtCore import Qt, pyqtSlot
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QListWidget, QAction, QWidget, QToolBar, QLabel
+from PyQt5.QtCore import Qt, QTimer, QRect, pyqtSlot, QDateTime
 from PyQt5 import QtWidgets
 
 import sys
 import socket
 import json
 import threading
+from datetime import datetime
 
 from ServidorTCP.HiloServidorTCP import ServerThread
 from Interface.Scripts.EventClasses import AlertWindow, DetectionWindow, MessageWindow
@@ -13,30 +14,27 @@ from Interface.Designs.SecurityWindow import Ui_WatchMenWindow
 
 class WatchMenApp (QMainWindow, Ui_WatchMenWindow):
     def __init__(self):
-        super(WatchMenApp, self).__init__()
+        super().__init__()
         self.setWindowFlags(Qt.WindowType.FramelessWindowHint)
         self.setupUi(self)
         self.showNormal()
 
         self.screen = QApplication.primaryScreen()
-        #screen = QApplication.primaryScreen()
-        #self.detectionDialog = AlertWindow(screen, self.RemoveEvent)
-        #self.detectionDialog.setParent(self.eventWidget)
-        self.alertText = "Desconexión con dispositivo(s): {} "
-        #self.alertDialog = DetectionWindow(screen, self.RemoveEvent)
-        #self.alertDialog.setParent(self.eventWidget)
-        self.detectionText = "Se detectó {} en cámara: {}"
-        #self.messageDialog = MessageWindow(screen, self.RemoveEvent)
-        #self.messageDialog.setParent(self.eventWidget)
-        self.messageText = "Conexión establecida con dispositivo(s): {}"
 
+        self.alertText = "Desconexión con dispositivo(s): {} "
+        self.detectionText = "Se detectó {} en cámara: {}"
+        self.messageText = "Conexión establecida con dispositivo(s): {}"
+        self.historialText = ""
+        self.CamarasConectadas = set()
+        self.DvrsConectados = set()
+        
         self.serverThread = ServerThread()
         self.serverThread.handleEventSignal.connect(self.handleEvent)
 
         self.serverThreadInstance = threading.Thread(target=self.serverThread.startServer)
         self.serverThreadInstance.daemon = True
         self.serverThreadInstance.start()
-        
+
         self.positions = {
             "0": {"tipo": "", "id": set()},
             "1": {"tipo": "", "id": set()},
@@ -82,10 +80,37 @@ class WatchMenApp (QMainWindow, Ui_WatchMenWindow):
         self.serverThread.allowData = True
 
     def ConnectionEvent(self, data):
-        self.AddEvent("msg" if data["accion"] else "alert", data["id"])
+        dispositivoId = data["id"]
+        time = QDateTime.currentDateTime().toString("HH:mm:ss")
+        #str(datetime.now().time())
+        if dispositivoId in self.dvrs:
+            nombre = self.dvrs[dispositivoId]["nombre"]
+            if data["accion"]:
+                self.DvrsConectados.add(dispositivoId)
+                historialText = f"{time} - {nombre} -> Conectado"
+            else:
+                self.DvrsConectados.remove(dispositivoId)
+                historialText = f"{time} - {nombre} -> Desconectado"
+        else:
+            nombre = self.camaras[dispositivoId]["nombre"]
+            if data["accion"]:
+                self.CamarasConectadas.add(dispositivoId)
+                historialText = f"{time} - {nombre} -> Conectado"
+            else:
+                self.CamarasConectadas.remove(dispositivoId)
+                historialText = f"{time} - {nombre} -> Desconectado"
+            
+        self.historialTextEdit.append(historialText)
+        self.AddEvent("msg" if data["accion"] else "alert", dispositivoId)
 
     def DetectionEvent(self, data):
-        self.AddEvent(data["accion"], data["id"])
+        time = QDateTime.currentDateTime().toString("HH:mm:ss")
+        tipoDeteccion = data["accion"]
+        dispositivoId = data["id"]
+        nombre = self.camaras[dispositivoId]["nombre"]
+        historialText = f"{time} - {nombre} -> Detección{tipoDeteccion}"
+        self.historialTextEdit.append(historialText)
+        self.AddEvent(tipoDeteccion, dispositivoId)
 
     def AddEvent(self, tipo, id):
         show = False
@@ -109,7 +134,6 @@ class WatchMenApp (QMainWindow, Ui_WatchMenWindow):
                 if not values["id"]:
                     values["tipo"] = tipo
                     values["id"].add(id)
-                    print("break2")
                     break
         self.DrawEvents()
 
@@ -189,6 +213,16 @@ class WatchMenApp (QMainWindow, Ui_WatchMenWindow):
                 event.showDialog(int(pos))
         #print("SHOW",self.positions)
         self.serverThread.allowData = True
+        self.updateConnectedDevices()
+
+    def updateConnectedDevices(self):
+        self.totalCamarasLabel.setText(str(len(self.camaras)))
+        self.connectedCamarasLabel.setText(str(len(self.CamarasConectadas)))
+        self.disconnectedCamarasLabel.setText(str(len(self.camaras) - len(self.CamarasConectadas)))
+        
+        self.totalDvrsLabel.setText(str(len(self.dvrs)))
+        self.connectedDvrsLabel.setText(str(len(self.DvrsConectados)))
+        self.disconnectedDvrsLabel.setText(str(len(self.dvrs) - len(self.DvrsConectados)))
 
     def closeApp(self):
         self.close()
