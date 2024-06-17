@@ -64,7 +64,7 @@ class ConexionDB:
     
     def ConsultarDatosRaspberry(self, *args):
         #return self.execute("PA_Name", args)
-        return '192.168.0.120', 1053
+        return '26.174.164.42', 1053
     
     def ConsultarDvrs(self, *args):
         #return self.execute("PA", *args)
@@ -82,40 +82,40 @@ class ConexionDB:
     
     def ConsultarCamaras(self, *args):
         #return self.execute("PA", *args)
-        hi = 12
-        hf = 12
+        hi = 16
+        hf = 16
         camaras = {
             "3": {
                 "iddvr": "1",
                 "id": "3",
                 "nombre": "PTZ PATIO GPA",
                 "canal": "1",
-                "horarioInicio": datetime.time(hi, 25, 0),
-                "horarioFin": datetime.time(hf, 30, 0),
+                "horarioInicio": datetime.time(hi, 50, 0),
+                "horarioFin": datetime.time(hf, 59, 0),
                 },
             "4": {
                 "iddvr": "1",
                 "id": "4",
                 "nombre": "AREA COMUN ATG B",
                 "canal": "2",
-                "horarioInicio": datetime.time(hi, 26, 0),
-                "horarioFin": datetime.time(hf, 31, 0),
+                "horarioInicio": datetime.time(hi, 50, 0),
+                "horarioFin": datetime.time(hf, 55, 0),
                 },
             "5": {
                 "iddvr": "1",
                 "id": "5",
                 "nombre": "MAQUINA 3D",
                 "canal": "3",
-                "horarioInicio": datetime.time(hi, 27, 0),
-                "horarioFin": datetime.time(hf, 32, 10),
+                "horarioInicio": datetime.time(hi, 54, 0),
+                "horarioFin": datetime.time(hf, 59, 10),
                 },
             "6": {
                 "iddvr": "1",
                 "id": "6",
                 "nombre": "AV OLIMPICA",
                 "canal": "5",
-                "horarioInicio": datetime.time(hi, 28, 0),
-                "horarioFin": datetime.time(hf, 33, 0),
+                "horarioInicio": datetime.time(hi, 45, 0),
+                "horarioFin": datetime.time(hf, 59, 0),
                 }
         }
 

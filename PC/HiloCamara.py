@@ -69,8 +69,8 @@ class Observer(mp.Process):
                 if 0 in results[0].boxes.cls:
                     timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                     print(f"persona - {self.cameraId}")
-                    #data = self.Raspberry.ConvertToDict("deteccion", self.camaraId, "Persona")
-                    #self.Raspberry.EnviarData(data)
+                    data = self.Raspberry.ConvertToDict("deteccion", self.camaraId, "Persona")
+                    self.Raspberry.EnviarData(data)
                     #self.DataBase.InsertarSituacion("deteccion", self.camaraId, timestamp)
 
                     cooldown = True

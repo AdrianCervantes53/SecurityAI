@@ -62,7 +62,7 @@ class WatchMen:
     
     def mainSetup(self):
         self.raspberryIp, self.raspberryPuerto = self.DataBase.ConsultarDatosRaspberry("Clave del Dispositivo")
-        #self.Raspberry = ClienteTCP(self.raspberryIp, self.raspberryPuerto)
+        self.Raspberry = ClienteTCP(self.raspberryIp, self.raspberryPuerto)
         
         dvrs = self.DataBase.ConsultarDvrs()
 
@@ -90,15 +90,18 @@ class WatchMen:
         _ = self.Raspberry.EnviarData(camDict)
         _ = self.Raspberry.EnviarData(dvrDict)
 
-        data = self.Raspberry.ConvertToDict("conexion", "1", True)
-        self.Raspberry.EnviarData(data)
+        """ for i in range(1,7):
+            if i == 2:
+                continue
+            data = self.Raspberry.ConvertToDict("conexion", str(i), True)
+            self.Raspberry.EnviarData(data) """
 
         self.observers = {}
         manageSchedule = threading.Thread(target=self.manageScheduleLoop)
         manageSchedule.daemon = True
         manageSchedule.start()
         #manageSchedule.join()
-        #self.mainLoop()
+        self.mainLoop()
         
                     
     def mainLoop(self):

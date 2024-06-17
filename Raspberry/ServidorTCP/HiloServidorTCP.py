@@ -7,7 +7,7 @@ import threading
 class ServerThread(QObject):
     handleEventSignal = pyqtSignal(dict)
 
-    def __init__(self, host='127.0.0.1', port=1053):
+    def __init__(self, host='26.174.164.42', port=1053):
         super().__init__()
         self.host = host
         self.port = port
