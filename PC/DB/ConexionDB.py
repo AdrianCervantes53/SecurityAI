@@ -83,48 +83,66 @@ class ConexionDB:
     
     def ConsultarCamaras(self, *args):
         #return self.execute("PA", *args)
-        hi = 10
+        hi = 11
         hf = 11
+        mi = 30
+        mf = 40
         camaras = {
             "3": {
                 "iddvr": "1",
                 "id": "3",
                 "nombre": "PTZ Patio GPA",
                 "canal": "1",
-                "horarioInicio": datetime.time(hi, 50, 0),
-                "horarioFin": datetime.time(hf, 10, 0),
+                "horarioInicio": datetime.time(hi, mi, 0),
+                "horarioFin": datetime.time(hf, mf, 0),
                 },
             "4": {
                 "iddvr": "1",
                 "id": "4",
                 "nombre": "Area Comun ATG B",
                 "canal": "2",
-                "horarioInicio": datetime.time(hi, 58, 0),
-                "horarioFin": datetime.time(hf, 4, 0),
+                "horarioInicio": datetime.time(hi, mi, 0),
+                "horarioFin": datetime.time(hf, mf, 0),
                 },
             "5": {
                 "iddvr": "1",
                 "id": "5",
                 "nombre": "Maquina 3D",
                 "canal": "3",
-                "horarioInicio": datetime.time(hi, 59, 0),
-                "horarioFin": datetime.time(hf, 5, 10),
+                "horarioInicio": datetime.time(hi, mi, 0),
+                "horarioFin": datetime.time(hf, mf, 10),
                 },
             "6": {
                 "iddvr": "1",
                 "id": "6",
-                "nombre": "Av Olimpica A",
-                "canal": "5",
-                "horarioInicio": datetime.time(hi, 59, 0),
-                "horarioFin": datetime.time(hf, 5, 0),
+                "nombre": "Impresion 3D",
+                "canal": "4",
+                "horarioInicio": datetime.time(hi, mi, 0),
+                "horarioFin": datetime.time(hf, mf, 0),
                 },
             "7": {
                 "iddvr": "1",
                 "id": "7",
+                "nombre": "Av Olimpica A",
+                "canal": "5",
+                "horarioInicio": datetime.time(hi, mi, 0),
+                "horarioFin": datetime.time(hf, mf, 0),
+                },
+            "8": {
+                "iddvr": "1",
+                "id": "8",
+                "nombre": "Area Comun ATG A",
+                "canal": "6",
+                "horarioInicio": datetime.time(hi, mi, 0),
+                "horarioFin": datetime.time(hf, mf, 0),
+                },
+            "9": {
+                "iddvr": "1",
+                "id": "9",
                 "nombre": "Av Olimpica B",
                 "canal": "11",
-                "horarioInicio": datetime.time(hi, 59, 0),
-                "horarioFin": datetime.time(hf, 15, 0),
+                "horarioInicio": datetime.time(hi, mi, 0),
+                "horarioFin": datetime.time(hf, mf, 0),
                 }
         }
 
