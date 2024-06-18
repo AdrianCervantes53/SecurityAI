@@ -15,7 +15,7 @@ class ClienteTCP(object):
                 raise DictionaryEmpty("No data")
             client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             client_socket.connect((self.host, self.puerto))
-            json_data = json.dumps(data)
+            json_data = json.dumps(data) + '\n'
             client_socket.sendall(json_data.encode('utf-8'))
             client_socket.close()
             return True
@@ -30,7 +30,7 @@ class ClienteTCP(object):
         try:
             data = {
                 "tipo": tipo,
-                "nombre": dispositivoId,
+                "id": dispositivoId,
                 "accion": accion
                 }
             return data

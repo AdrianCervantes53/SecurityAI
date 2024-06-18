@@ -101,29 +101,36 @@ class WatchMen:
         manageSchedule.daemon = True
         manageSchedule.start()
         #manageSchedule.join()
-        self.mainLoop()
+        self.mainLoop(cameraData, dvrData)
         
-                    
-    def mainLoop(self):
+    def mainLoop(self, cameraData, dvrData):
         dvrDesconectado = set()
         camaraDesconectada = set()
+        for val in cameraData.values():
+            idx = val["id"]
+            camaraDesconectada.add(idx)
+        
+        for val in dvrData.values():
+            idx = val["id"]
+            dvrDesconectado.add(idx)
+
         while True:
             for dvr in self.dvrObjects.values():
-                connected = dvr.CheckDVRConnection()
+                dvr.CheckDVRConnection()
                 
-                if not connected :
+                if not dvr.active :
                     if dvr.dvrId not in dvrDesconectado:
                         dvr.active = False
-                        print(f"conexion - {dvr.dvrId} - {dvr.active}")
+                        print(f"conexionxd - {dvr.dvrId} - {dvr.active}")
                         data = self.Raspberry.ConvertToDict("conexion", dvr.dvrId, dvr.active)
                         self.Raspberry.EnviarData(data)
                         dvrDesconectado.add(dvr.dvrId)
                 else:
-                    if connected and dvr.dvrId in dvrDesconectado:
+                    if dvr.dvrId in dvrDesconectado:
                         dvr.active = True
                         print(f"conexion - {dvr.dvrId} - {dvr.active}")
                         data = self.Raspberry.ConvertToDict("conexion", dvr.dvrId, dvr.active)
-                        self.Raspberry.EnviarData()
+                        self.Raspberry.EnviarData(data)
                         dvrDesconectado.remove(dvr.dvrId)
 
             for camara in self.camaraObjects.values():
@@ -145,7 +152,6 @@ class WatchMen:
                         print(f"conexion - {camara.camaraId} - {camara.active}")
                         camaraDesconectada.remove(camara.camaraId)
                         
-                tiempoActual = datetime.now().time()
                 if camara.vigilanciaActiva:
                     if not camara.running:
                         self.startProcess(camara)
@@ -159,7 +165,7 @@ class WatchMen:
                     
     def startProcess(self, camara):
         try:
-            cam = Observer(0, self.DataBase, self.raspberryIp, self.raspberryPuerto, camara.camaraIp, camara.camaraId)
+            cam = Observer(self.DataBase, self.raspberryIp, self.raspberryPuerto, camara.camaraIp, camara.camaraId)
             cam.start()
             self.observers[camara.camaraId] = cam
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
