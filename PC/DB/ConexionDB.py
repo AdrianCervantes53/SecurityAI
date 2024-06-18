@@ -64,6 +64,7 @@ class ConexionDB:
     
     def ConsultarDatosRaspberry(self, *args):
         #return self.execute("PA_Name", args)
+        #return '26.114.167.197', 1053
         return '26.174.164.42', 1053
     
     def ConsultarDvrs(self, *args):
@@ -82,40 +83,48 @@ class ConexionDB:
     
     def ConsultarCamaras(self, *args):
         #return self.execute("PA", *args)
-        hi = 16
-        hf = 16
+        hi = 10
+        hf = 11
         camaras = {
             "3": {
                 "iddvr": "1",
                 "id": "3",
-                "nombre": "PTZ PATIO GPA",
+                "nombre": "PTZ Patio GPA",
                 "canal": "1",
                 "horarioInicio": datetime.time(hi, 50, 0),
-                "horarioFin": datetime.time(hf, 59, 0),
+                "horarioFin": datetime.time(hf, 10, 0),
                 },
             "4": {
                 "iddvr": "1",
                 "id": "4",
-                "nombre": "AREA COMUN ATG B",
+                "nombre": "Area Comun ATG B",
                 "canal": "2",
-                "horarioInicio": datetime.time(hi, 50, 0),
-                "horarioFin": datetime.time(hf, 55, 0),
+                "horarioInicio": datetime.time(hi, 58, 0),
+                "horarioFin": datetime.time(hf, 4, 0),
                 },
             "5": {
                 "iddvr": "1",
                 "id": "5",
-                "nombre": "MAQUINA 3D",
+                "nombre": "Maquina 3D",
                 "canal": "3",
-                "horarioInicio": datetime.time(hi, 54, 0),
-                "horarioFin": datetime.time(hf, 59, 10),
+                "horarioInicio": datetime.time(hi, 59, 0),
+                "horarioFin": datetime.time(hf, 5, 10),
                 },
             "6": {
                 "iddvr": "1",
                 "id": "6",
-                "nombre": "AV OLIMPICA",
+                "nombre": "Av Olimpica A",
                 "canal": "5",
-                "horarioInicio": datetime.time(hi, 45, 0),
-                "horarioFin": datetime.time(hf, 59, 0),
+                "horarioInicio": datetime.time(hi, 59, 0),
+                "horarioFin": datetime.time(hf, 5, 0),
+                },
+            "7": {
+                "iddvr": "1",
+                "id": "7",
+                "nombre": "Av Olimpica B",
+                "canal": "11",
+                "horarioInicio": datetime.time(hi, 59, 0),
+                "horarioFin": datetime.time(hf, 15, 0),
                 }
         }
 

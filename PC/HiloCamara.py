@@ -12,14 +12,14 @@ class Observer(mp.Process):
     def __init__(self, DataBase, ip, puerto, cameraIp, cameraId):
         super().__init__()
         self.DataBase = DataBase
-        #self.Raspberry = ClienteTCP(ip, puerto)
+        self.Raspberry = ClienteTCP(ip, puerto)
         self.cameraIp = cameraIp
         self.cameraId = cameraId
         self.stopEvent = mp.Event()
         
     def run(self):
         
-        model = YOLO('Modelos/yolov8n.pt')
+        model = YOLO('Modelos/yolov8s.pt')
         cap = cv2.VideoCapture(self.cameraIp)
         print("framed")
         ret , firstFrame = cap.read()
@@ -37,7 +37,7 @@ class Observer(mp.Process):
                 continue
 
             if cooldown:
-                cooldown = False if time.time() - cooldownTime > 10 else True
+                cooldown = False if time.time() - cooldownTime > 5 else True
             else:
                 """ gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
                 gray = cv2.GaussianBlur(gray, (21, 21), 0)
@@ -69,16 +69,16 @@ class Observer(mp.Process):
                 if 0 in results[0].boxes.cls:
                     timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
                     print(f"persona - {self.cameraId}")
-                    data = self.Raspberry.ConvertToDict("deteccion", self.camaraId, "Persona")
+                    data = self.Raspberry.ConvertToDict("deteccion", self.cameraId, "Persona")
                     self.Raspberry.EnviarData(data)
                     #self.DataBase.InsertarSituacion("deteccion", self.camaraId, timestamp)
 
                     cooldown = True
                     cooldownTime = time.time()
 
-                    res_plotted = results[0].plot()
-                    cv2.imshow(f"test {self.cameraId}", res_plotted)
-                    cv2.waitKey(1)
+                    #res_plotted = results[0].plot()
+                    #cv2.imshow(f"test {self.cameraId}", res_plotted)
+                    #cv2.waitKey(1)
                 #first_frame_gray = gray
     
         cap.release()
